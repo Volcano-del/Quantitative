@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留言</title>
+    <link rel="stylesheet" href="../css/reset.css"/>
+    <link rel="stylesheet" href="../element_ui/element.css">
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/leaving.css">
+    <style>
+        .el-dropdown-link {
+        cursor: pointer;
+        color: #409EFF;
+      }
+      .el-icon-arrow-down {
+        font-size: 12px;
+      }
+      .el-dropdown {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+    }
+        [v-cloak]{
+            display: none
+        }
+        </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+     <!-- 顶部 -->
+      <!-- 登录状态 -->
+      <div class="top" v-if="onLogin">
+        <div class="center">
+            <h1>
+                <span>
+                <img src="../img/logo_03.png" alt="" />
+                </span>
+            </h1>
+          <div class="user us_center">
+                <el-dropdown :hide-on-click="false" @command="handleCommand">   
+                    <div class="hea">
+                        <div class="head_portrait">
+                            <img :src="head_portrait" onerror="this.src='../img/head-img.png'" alt="" />
+                        </div>
+                        <div class="info">{{student_name}}</div>
+                    </div>
+                    <!-- {{student_name}} -->
+                    <div class="submenu">
+                            <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item command="a">个人中心</el-dropdown-item>
+                            <el-dropdown-item command="b">退出</el-dropdown-item>
+                            </el-dropdown-menu>
+                        <!-- <a href="">个人中心</a>
+                        <a href="">退出</a> -->
+                    </div>
+                </el-dropdown>
+          </div>
+        </div>
+      </div>
+      <!-- 未登录状态 -->
+      <div class="top" v-if="downLogin">
+        <div class="center">
+          <h1>
+            <span>
+              <img src="../img/logo_03.png" alt="" />
+            </span>
+          </h1>
+          <div class="user">
+            <div class="btn btn_blue" @click="lo()">登录</div>
+            <div class="btn" @click="re()">注册</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 留言列表 -->
+        <div class="main_top">
+            <!-- 面包屑导航 -->
+            <div class="locate">
+                <div class="crumbs">
+                    <el-breadcrumb separator="/">
+                        <div class="main_img icon">
+                            <i class="icon icon-del"></i>
+                        </div>
+                        <el-breadcrumb-item><a href="../index.html">首页</a></el-breadcrumb-item>
+                        <el-breadcrumb-item><a href="./leaving.html">公共留言中心</a></el-breadcrumb-item>
+                    </el-breadcrumb>
+                </div>
+            </div>
+            <!-- 左侧留言页列表 -->
+            <div class="main">
+                <div class="main_auto ma_bo">
+                    <span>留言区</span>
+                </div>
+                <div class="main_zh ma_bo" v-for="(item,index) of tabledata" v-if="tabledata">
+                    <div class="main_left">
+                        <img :src="item.head_portrait"  onerror="this.src='../img/head-img.png'" alt="">
+                    </div>
+                    <div class="main_right">
+                        <div class="main_right_top main_mang">
+                            <span>{{item.student_name}}</span>
+                            <span>{{item.create_time}}</span>
+                        </div>
+                        <div class="main_right_sec main_mang">
+                            <span class="main_ris">{{item.title}}</span>
+                        </div>
+                        <div class="main_right_three ">
+                            <span class="main_src" style="text-align: left;">
+                                {{item.content}}
+                            </span>
+                            <div class="main_to_s">
+                                <span @click="go_read(item.message_id)">
+                                    阅读全文
+                                </span>
+                                <div class="main_img icon">
+                                  <i class="icon icon-del"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="main_right_foot">
+                            <div class="main_fi_one">
+                                <div class="main_di"></div>
+                                <span style="margin-right: 10px;">{{item.reply_num}} 条回复</span>
+                            </div>
+                            <!-- <div class="main_fi_two" :class="{ shoe_img : show1 }" @click="addup(index,item.message_id,item.likenum)">
+                <div class="comi main_ri_t"></div>
+                <span>{{item.likenum}}</span>
+              </div> -->
+                        </div>
+                    </div>
+                </div>
+                <!-- <div id="demo2-2" class="main_foe"></div>   -->
+                <div class="block main_foe">
+                    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage3" :page-size="10" layout="prev, pager, next, jumper" :total="1000">
+                    </el-pagination>
+                </div>
+            </div>
+            <!-- 右侧信息与创建留言 -->
+            <!-- <div  class="main_rights">
+        <div class="main_ao ma_bo">
+          <span>创建留言</span>
+        </div>
+        <div class="main_bu">
+          <button class="buto buto_blu">
+            <div class="but_img"></div>
+            <span>消息</span>
+          </button>
+          <button class="butos buto_blu">
+            <div class="but_img"></div>
+            <span>创建留言</span>
+          </button>
+        </div>
+      </div> -->
+
+        </div>
+        <div class="main_foot">
+            <div class="main_f_top foot_coom">
+                <span>标题：</span>
+                <span>简短一些让其他人快速了解你的主题（1~50字）</span>
+            </div>
+            <div class="main_f_inp">
+                <input type="text" placeholder="请输入标题名称" v-model="title" class="text_s">
+            </div>
+            <div class="main_f_top main_s_top foot_coom">
+                <span>内容：</span>
+                <span>在这里填写详细的内容</span>
+            </div>
+            <div class="main_f_inp main_s_inp">
+                <textarea name="" id="main_text" cols="166" rows="10" class="text_s" placeholder="请输入正文" v-model="content"></textarea>
+            </div>
+            <div class="main_f_but">
+                <button @click="update">发布</button>
+            </div>
+        </div>
+        <!-- 页脚 -->
+        <div class="center footer">
+            <span>
+                <span>©2012-2020 华北水利水电大学</span>
+                <span>豫公网安备11010802017518</span>
+                <span>豫ICP备14061682号-1</span>
+            </span>
+        </div>
+    </div>
+</div>
+    <script src="../element_ui/vue.js"></script>
+    <script src="../element_ui/element.js"></script>
+    <script src="../publicJs/jquery-1.12.4.js"></script>
+    <script src="../layui/layui.js"></script>
+    <script src="../publicJs/axios.js"></script>
+    <script src="../publicJs/pub.js"></script>
+    <script src="../js/leaving.js"></script>
+    <script>
+        // window.setTimeout(() => {
+        //     $(".main_src").each(function() {
+        //         //获取内容
+        //         var str = $(this).html();
+        //         //截取内容5个字符
+        //         var subStr = str.substring(7, 140);
+        //         //如果长度大于140就添加省略号否则就添加空
+        //         var data = subStr + (str.length > 140 ? '...' : '');
+        //         $(this).html(data);
+        //     });
+        //     $(".main_ris").each(function() {
+        //         //获取内容
+        //         var mstr = $(this).html();
+        //         //截取内容5个字符
+        //         var msubStr = mstr.substring(0, 55);
+        //         //如果长度大于140就添加省略号否则就添加空
+        //         var data = msubStr + (mstr.length > 55 ? '...' : '');
+        //         $(this).html(data);
+        //     });
+        // }, 100);
+    </script>
+</body>
+
+</html>

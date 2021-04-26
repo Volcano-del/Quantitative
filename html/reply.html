@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>管理员回复</title>
+    <link rel="stylesheet" href="../css/reply.css">
+    <link rel="stylesheet" href="../element_ui/element.css">
+    <style>
+        .el-dialog{
+            margin-top: 25vh!important;
+        }
+        .el-button{
+            margin-top: 12px;
+        }
+    </style>
+</head>
+<body>
+<!-- 顶部 -->
+<div id="app" v-cloak>
+    <!-- 顶部 -->
+    <div class="top">
+            <h1>
+                <span>
+                    管理员回复留言
+                </span>
+            </h1>
+            <div class="user">
+                <div class="btn" @click="dialogVisible = true">回复</div>
+                <el-dialog
+                    title=""
+                    :visible.sync="dialogVisible"
+                    width="60%"
+                    :before-close="handleClose">
+                    <ul id="pn">
+                        <li class="list0">
+                            <div class="head"><img src="http://www.sucainiu.com/themes/images/demo/500x300-2.png" alt=""></div>
+                            <div class="content">
+                                <p class="text"><span class="name">标题：</span>哈哈哈哈哈</p>
+            
+                                <p class="text"><span class="name">内容：</span>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
+            
+                                <div class="good"><span class="date">02-14 23:01</span></div>
+            
+                                <div class="comment-list">
+                                    <div class="comment" user="self">
+                                        <div class="comment-left"><img src="http://www.sucainiu.com/themes/images/demo/500x300-2.png" alt=""></div>
+                                        <div class="comment-right">
+                                            <div class="comment-text"><span class="user">老王：</span>我</div>
+                                            <div class="comment-date">02-14 22:00 <a class="comment-dele" href="javascript:;">删除</a> </div>
+                                        </div>
+                                    </div>
+                                    <div class="comment" user="self">
+                                        <div class="comment-left"><img src="http://www.sucainiu.com/themes/images/demo/500x300-2.png" alt=""></div>
+                                        <div class="comment-right">
+                                            <div class="comment-text"><span class="user">我：</span>看哭了留卡号吧</div>
+                                            <div class="comment-date">02-14 24:00  <a class="comment-dele" href="javascript:;">删除</a> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hf">
+                                    <textarea style="color:#808080; border-radius: 2px;" v-model="reply" type="text" class="hf-text" autocomplete="off" maxlength="100" placeholder="评论..."></textarea>
+                                    <el-button id="hf" class="hf-btn" type="primary" @click="open">确 定</el-button>
+                                    <!-- <button class="hf-btn">回复</button> -->
+                                    <!-- <span class="hf-nub">0/100</span> </div> -->
+                            </div>
+                        </li>
+                    </ul>
+                </el-dialog>
+            </div>
+    </div>
+    <div class="center">
+
+    </div>
+</div>
+
+    <script src="../publicJs/vue.js"></script>
+    <script src="../element_ui/element.js"></script>
+    <script src="../publicJs/axios.js"></script>
+    <script src="../publicJs/jquery-1.12.4.js"></script>
+    <script src="../js/reply.js"></script>
+</body>
+<script>
+
+</script>
+</html>

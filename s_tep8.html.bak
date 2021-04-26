@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实验步骤五</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/step.css">
+    <link rel="stylesheet" href="./element_ui/element.css">
+
+    <style>
+        .band {
+            width: 90%;
+            min-width: 700px;
+            height: 460px;
+            margin: 20px 66px 0px;
+            /* background-color: blue; */
+        }
+        .center {
+            width:85%;
+            min-width: 850px;
+            margin: 20px auto 20px;
+            /* background-color: antiquewhite; */
+        }
+        .main {
+            padding-top: 100px;
+            background-color: #fff;
+            height:505px;
+        }
+        .line{
+            width: 100%;
+            min-width: 650px;
+            /* background-color: aqua; */
+            /* border-bottom: 1px solid #eee; */
+        }
+        .el-checkbox__label {
+            display: inline-block;
+            padding-left: 10px;
+            line-height: 19px;
+            font-size: 24px;
+        }
+        .el-checkbox__inner { 
+            width: 22px;
+            height: 22px;       
+        }
+        .el-checkbox__inner::after {       
+            height: 12px;           
+            width: 10px;          
+        }
+        .zhushi{
+            width: 90%;
+            margin: 0 auto;
+            /* margin-left: 30px; */
+        }
+        .zhushi div{
+            margin: 20px 0;
+            font-size: 18px;
+        }
+        .zhushi1{
+            font-weight: bold;
+            font-size: 20px!important;
+        }
+        .gobutton{
+            display: flex;
+            justify-content: center;
+            margin-top: 60px;
+        }
+        .gobutton a{
+            margin: 10px;
+        }
+        #customers
+          {
+          font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+          width:100%;
+          border-collapse:collapse;
+          }
+
+        #customers td, #customers th 
+          {
+          text-align: center;
+          font-size:1em;
+          border-top:1px solid #cad9ea;
+          border-bottom:1px solid #cad9ea;
+          padding:3px 7px 2px 7px;
+          }
+
+        #customers th 
+          {
+          font-size:1.1em;
+          text-align:center;
+          padding-top:5px;
+          padding-bottom:4px;
+          background-color:#CCE8EB;
+          color:#ffffff;
+          }
+        #customers tr.alt td 
+          {
+          color:#000000;
+          background-color:#F5FAFA;
+          }
+        .sele{
+          width: 75%;
+          height: 35px;
+          border: 1px solid #eeeeee;
+        }
+        .init{
+          height: 30px;
+          border: 1px solid #eee;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="top">
+            <div class="logo">
+                <img src="./img/logo_03.png" width="100%" alt="">
+            </div>
+            <div class="top_r">
+            <ul class="nav">
+                <li>首页</li>
+                <li>开始试验</li>
+                <li>我的试验</li>
+                
+            </ul>
+            <div class="btn_log">登录/注册</div>
+            </div>
+        </div>
+        <div class="banner">
+            <img src="./img/banner.png" width="100%" alt="">
+        </div>
+        <div class="center main_title">
+            <div class="bar"></div>
+            <span class="title">量化择时之技术指标</span>
+        </div>
+        <div class="center main">
+          <div class="band">
+            <div class="line">
+              <table id="customers">
+                <tr>
+                  <th>指标名称</th>
+                  <th>选项</th>
+                  <th>值</th>
+                  <th>单位</th>
+                </tr>
+                
+                <tr>
+                  <td>昨日收盘价</td>
+                  <td>
+                    <select class="sele" v-model="valu1">
+                      <option selected value>请选择</option>
+                      <option value="volvo">大于n日均值</option>
+                      <option value="saab">小于n日均值</option>
+                      <option value="opel">等于n日均值</option>
+                    </select>
+                  </td>
+                  <td>
+                    <input type="number " name="number" placeholder="请输入内容" class="init" autocomplete="off" v-model="inpt1" @keyup="inpt1=inpt1.replace(/\D/g,'')" @afterpaste="inpt1=inpt1.replace(/\D/g,'')">
+                  </td>
+                  <td>天</td>
+                </tr>
+                
+                <tr class="alt">
+                  <td>昨日成交量</td>
+                  <td>
+                    <select class="sele" v-model="valu2">
+                      <option selected value>请选择</option>
+                      <option value="volvo">大于n日均值</option>
+                      <option value="saab">小于n日均值</option>
+                      <option value="opel">等于n日均值</option>
+                    </select>
+                  </td>
+                  <td>
+                    <input type="number " name="number" placeholder="请输入内容" class="init" autocomplete="off" v-model="inpt2" @keyup="inpt2=inpt2.replace(/\D/g,'')" @afterpaste="inpt2=inpt2.replace(/\D/g,'')">
+                  </td>
+                  <td>天</td>
+                </tr>
+                
+                <tr>
+                  <td>昨日振幅</td>
+                  <td>
+                    <select class="sele" v-model="valu3" placeholder="请选择">
+                      <option selected value>请选择</option>
+                      <option value="volvo">大于</option>
+                      <option value="saab">小于</option>
+                    </select>
+                  </td>
+                  <td>
+                    <input type="number " name="number" placeholder="请输入内容" class="init" autocomplete="off" v-model="inpt3" @keyup="inpt3=inpt3.replace(/\D/g,'')" @afterpaste="inpt3=inpt3.replace(/\D/g,'')">
+                  </td>
+                  <td>%</td>
+                </tr>
+                
+                <tr class="alt">
+                  <td>累计涨幅</td>
+                  <td>
+                    <select class="sele" v-model="valu4">
+                      <option selected value>请选择</option>
+                      <option value="volvo">5日累计大于</option>
+                      <option value="saab">5日累计小于</option>					  
+                      <option value="saab">10日累计大于</option>
+                      <option value="saab">10日累计小于</option>
+                    </select>
+                  </td>
+                  <td>
+                    <input type="number " name="number" placeholder="请输入内容" class="init" autocomplete="off" v-model="inpt4" @keyup="inpt4=inpt4.replace(/\D/g,'')" @afterpaste="inpt4=inpt4.replace(/\D/g,'')">
+                  </td>
+                  <td>%</td>
+                </tr>
+              </table>
+        </div>
+        <div >
+          <div class="gobutton" style="margin-top: 242px;">
+            <a href="./s_tep7.html"><div class="btn_step_go">上一步</div></a>
+            <a><div class="btn_step_go" @click="godown9">下一步</div></a>
+          </div> 
+        </div>
+        </div>
+        </div>
+    </div>
+</body>
+    <script src="./element_ui/vue.js"></script>
+    <script src="./element_ui/element.js"></script>
+    <script src="./js/step7.js"></script>
+</html>

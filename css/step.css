@@ -1,0 +1,235 @@
+body{
+    background-color: #f7f8fa;
+}
+.top {
+    height: 75px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+}
+
+.top .logo {
+    margin-top: 15px;
+    margin-left: 15px;
+    width: 290px;
+}
+
+.top .nav {
+    display: flex;
+    align-items: center;
+}
+.top_r{
+    display: flex;
+    align-items: center;
+    padding-right: 25px;
+}
+.nav>li {
+    padding: 0 25px;
+    border-right: 1px solid #333;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #333;
+    cursor: pointer;
+}
+
+.nav>li:last-child {
+    border: 0;
+}
+
+.nav>li:hover {
+    color: #005bac;
+}
+.btn_log{
+    width: 128px;
+	height: 40px;
+	background-color: #005bac;
+    border-radius: 3px;
+    line-height: 40px;
+    font-size: 14px;
+	font-weight: normal;
+    font-stretch: normal;
+    text-align: center;
+	letter-spacing: 0px;
+	color: #ffffff;
+}
+.banner{
+    height: 200px;
+    overflow: hidden;
+}
+.center{
+    width: 1200px;
+    margin: 0 auto;
+}
+.main_title{
+    height: 70px;
+    margin: 22px auto 20px;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+}
+.bar{
+    width: 4px;
+	height: 20px;
+    background-color: #005bac;
+    margin-right: 23px;
+}
+.title{
+    font-size: 27px!important;
+  }
+.main_title span{
+    font-size: 18px;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0px;
+	color: #333333;
+}
+.main{
+    padding-top: 50px;
+    background-color: #fff;
+}
+.band{
+    width: 600px;
+    height: 260px;
+    margin: 0 auto 50px;
+}
+.line{
+    display: flex;
+    margin-bottom: 20px;
+    height: 50px;
+    align-items: center;
+    justify-content: space-between;
+}
+.btn_step_go{
+    width: 180px;
+	height: 50px;
+	background-color: #005bac;
+    border-radius: 3px;
+    font-size: 16px;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 50px;
+	letter-spacing: 2px;
+    color: #ffffff;
+    text-align: center;
+    margin: 0 auto;
+    cursor: pointer;
+}
+.control{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    text-indent: 2em;
+}
+.controls{
+    flex: 1;
+    height: 100%;
+}
+.sp{
+    width: 75px;
+    text-align: center;
+}
+.controls,
+.control{
+    font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 1px;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+/* 步骤2 */
+.step{
+    height: 43px;
+    line-height: 43px;
+    background-color: #fff;
+    padding-left: 25px;
+}
+.btn_goback{
+    display: inline-block;
+    background-color: #ffffff;
+    border: solid 1px #d9dcdf;
+    padding:0 16px;
+    height: 34px;
+    line-height: 34px;
+    font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0px;
+    color: #333333;
+    cursor: pointer;
+}
+.datehandler{
+    height: 48px;
+    display: flex;
+}
+.dl,
+.dr{
+    display: inline-block;
+    display: flex;
+    padding-top: 8px;
+    
+    background-color: #e8ecf0;
+}
+.dl{
+    width: 323px;
+}
+.dl .btn_goback{
+    margin: 0 15px 0 25px;
+}
+.dr{
+    width: 1596px;
+    justify-content: space-between;
+    padding: 8px 20px 0;
+}
+.date .btn_goback{
+    border: 0;
+    width:160px;
+    white-space: nowrap;
+}
+.btn_normal{
+    height: 34px;
+    background-color: #005bac;
+    line-height: 34px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0px;
+    color: #ffffff;
+    padding: 0 26px;
+    float: left;
+    margin-left: 20px;
+}
+.main .dl{
+    padding: 15px 26px;
+}
+.line_cont input{
+    width: 220px;
+	height: 38px;
+    border: solid 1px #e6e6e6;
+    outline: none;
+    text-indent: 2em;
+}
+.step2{
+    display: flex;
+    background-color: #fff;
+}
+.step2 .dr{
+    padding: 20px 20px 0 0 ;
+    position: relative;
+}
+.step4 .dr{
+    min-width: 915px!important;
+}
+.btns{
+    position: absolute;
+    right: 30px;
+    top: 13px;
+}
+.btns .btn_goback:not(:last-child):hover{
+    background-color: #eeeeee;
+}

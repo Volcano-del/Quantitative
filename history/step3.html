@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>步骤三</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/step.css">
+    <style>
+        .step3{
+            display: flex;
+        }
+        .step3 .dl{
+            width: 949px;
+        }
+        .step3 .dr{
+            width: 949px;
+            position: relative;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top">
+        <div class="logo">
+            <img src="./img/logo_03.png" width="100%" alt="">
+        </div>
+        <div class="top_r">
+            <ul class="nav">
+                <li>导航1</li>
+                <li>导航2</li>
+                <li>导航3</li>
+                <li>导航4</li>
+                <li>导航5</li>
+                <li>导航6</li>
+                <li>导航7</li>
+            </ul>
+            <div class="btn_log">登录/注册</div>
+        </div>
+    </div>
+    <div class="step">
+        <div class="btn_goback back">
+            &lt;上一步
+        </div>
+    </div>
+    <div class="datehandler step3">
+        <div class="dl">
+            <div class="btn_goback">保存</div>
+            <div class="btn_goback next">编译运行</div>
+        </div>
+        <div class="dr">
+            <div class="date">
+                <div class="btn_goback">2019-10-10</div>
+                <span>至</span>
+                <div class="btn_goback">2020-04-26</div>
+                <div class="btn_goback">收益：￥ 100000</div>
+            </div>
+            <div class="btn_group">
+                <div class="btn_normal">按钮1</div>
+                <div class="btn_normal">按钮2</div>
+                <div class="btn_normal">按钮3</div>
+            </div>
+        </div>
+    </div>
+    <div class="step3">
+        <div class="dl">
+          <div>
+              <img src="./img/code.png" alt="">
+          </div>
+        </div>
+        <div class="dr" style="border-left: 1px solid #e1e1e1;">
+            <img src="./img/date1.png" style="width: 100%;" alt="">
+            <div class="btns">
+                <div class="btn_goback">加速</div>
+                <div class="btn_goback">减速</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var his_arr=['step1.html','step2.html','step3.html','step4.html']
+        var back = document.querySelector('.back');
+        back.onclick=function(){
+            window.location.href = his_arr[1]
+        }
+        var next = document.querySelector('.next');
+        next.onclick=function(){
+            window.location.href = his_arr[3]
+        }
+    </script>
+</body>
+
+</html>

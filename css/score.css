@@ -1,0 +1,80 @@
+#app{
+    width: 100%;
+    margin: 0 auto;
+}
+.top {
+    width: calc(100% - 40px);
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.user{
+    display: flex;
+}
+.btn {
+    width: 100px;
+    height: 36px;
+    border-radius: 5px;
+    font-size: 16px;
+    line-height: 36px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #eee;
+    align-self: center;
+    color: #ffffff;
+    background-color: #337ab7;
+}
+.btn:hover{
+    background-color: #286090;
+}
+
+.center{
+    width: calc(100% - 40px);
+    height: 500px;
+    margin: 0 auto;
+    background-color: #f1f3f4;
+}
+
+/* 弹出框页面 */
+.warn{
+    font-size: 12px;
+    color: red;
+    padding-left: 38px;
+}
+.el-table .cell{
+    width: 369px;
+}
+.input{
+    width: 40px;
+    height: 20px;
+    margin-left: 65%;
+    border: 1px solid #e8e8e8;
+}
+.user input:focus{
+    /* border: 2px solid #45a1d7; */
+    /* outline: 1px solid #45a1d7; */
+    outline-color: #45a1d7;
+}
+.el-button--default{
+    border-color: #e8e8e8!important;
+    color: #ccc!important;
+}
+.el-button--default:hover{
+    border-color: #337ab7!important;
+    color: #337ab7!important;
+}
+.el-button--primary{
+    background-color: #337ab7!important;
+    border-color: #2e6ea4!important;
+}
+.el-button--primary:hover{
+    background-color: #286090!important;
+    border-color: #204d74!important;
+}
+.yan{
+    font-size: 12px;
+    color: #ccc;
+    width: calc(100% - 80px);
+    margin: 35px auto 0;
+}

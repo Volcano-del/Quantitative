@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>步骤五</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/step.css">
+    <link rel="stylesheet" href="./element_ui/element.css">
+    <style>
+      .line_step0{
+        width: 250px;
+        height:110px;
+        border: solid 1px #eeeeee;
+        text-align: center;
+        cursor: pointer;
+      }
+      .line_step0_change{
+        border: solid 1px #000;
+      }
+      .line_step0 p:first-child{
+        font-weight: bold;
+      }
+      .line_step0 p{
+        margin: 15px;
+      }
+      .bind_step{
+        display: flex;
+        justify-content: space-around;
+        height: 200px;
+        margin: 0 auto 20px;
+      }
+      .gobutton{
+        padding: 0 30%;
+        display: flex; 
+        justify-content: space-around;
+        margin: 0 auto 20px;
+      }
+    </style>
+</head>
+<body>
+    <div class="top">
+        <div class="logo">
+            <img src="./img/logo_03.png" width="100%" alt="">
+        </div>
+        <div class="top_r">
+        <ul class="nav">
+            <li>导航1</li>
+            <li>导航2</li>
+            <li>导航3</li>
+            <li>导航4</li>
+            <li>导航5</li>
+            <li>导航6</li>
+            <li>导航7</li>
+        </ul>
+        <div class="btn_log">登录/注册</div>
+        </div>
+    </div>
+    <div class="banner">
+        <img src="./img/banner.png" width="100%" alt="">
+    </div>
+    <div class="center main_title">
+        <div class="bar"></div>
+        <span>选择策略类型</span>
+    </div>
+    <div class="center main" style="height: 350px;">
+        <div class="band bind_step">
+            <div class="line_step0">
+                <p>菜单式策略</p>
+                <p>通过预设公式并输入参数值来实现公式推导</p>
+            </div>
+            <div class="line_step0">
+              <p>菜单式策略</p>
+              <p>通过预设公式并输入参数值来实现公式推导</p>
+          </div> 
+        </div>
+        <div class="gobutton">
+          <a href="./step2.html"><div class="btn_step_go">上一步</div></a>
+          <a href="./step2.html"><div class="btn_step_go">下一步</div></a>
+        </div> 
+    </div>
+
+</body>
+<script src="./element_ui/vue.js"></script>
+<script src="./element_ui/element.js"></script>
+</html>

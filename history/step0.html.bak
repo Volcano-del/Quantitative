@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>步骤一</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/step.css">
+    <link rel="stylesheet" href="./element_ui/element.css">
+    <style>
+      .line_step0{
+        width: 42%;
+        height:147px;
+        text-align: center;
+        cursor: pointer;
+        border: solid 1px #eeeeee;
+        font-size: 20px;
+      }
+      .btn_step_go{
+        width: 180px;
+        height: 50px;
+        background-color: #005bac;
+        border-radius: 3px;
+        font-size: 16px;
+        font-weight: normal;
+        font-stretch: normal;
+        line-height: 50px;
+        letter-spacing: 2px;
+          color: #ffffff;
+          text-align: center;
+          margin: 0 auto;
+          cursor: pointer;
+      }
+      .center{
+        width:85%;
+        min-width: 650px;
+        margin: 20px auto 20px;
+      }
+
+      .line_step0_change{
+        border: solid 1px #000;
+      }
+      .line_step0 p:first-child{
+        font-weight: bold;
+      }
+      .line_step0 p{
+        margin: 15px;
+      }
+      .bind_step{
+        display: flex;
+        justify-content: space-around;
+        height: 200px;
+        margin: 0 auto 94px;
+      }
+      .gobutton{
+        padding: 0 30%;
+        display: flex; 
+        justify-content: space-around;
+        margin: 0 auto 20px;
+      }
+      .gobutton a{
+        margin-right: 40px;
+      }
+    </style>
+</head>
+<body>
+    <div id="app">
+      <div class="top">
+        <div class="logo">
+            <img src="./img/logo_03.png" width="100%" alt="">
+        </div>
+        <div class="top_r">
+        <ul class="nav">
+             <li>首页</li>
+                <li>开始试验</li>
+                <li>我的试验</li>
+        </ul>
+        <div class="btn_log">登录/注册</div>
+        </div>
+    </div>
+    <div class="banner">
+        <img src="./img/banner.png" width="100%" alt="">
+    </div>
+    <div class="center main_title">
+        <div class="bar"></div>
+        <span>选择策略类型</span>
+    </div>
+    <div class="center main" style="height: 430px;">
+        <div class="band bind_step">
+            <div class="line_step0" :class="{line_step0_change:isline_step}" @click="line(true)">
+                <p>菜单式策略</p>
+                <p>通过预设公式并输入参数值来实现公式推导</p>
+            </div>
+            <div class="line_step0" @click="line(false)" 
+             v-loading="loading"
+            element-loading-text="正在生成中,请稍后"
+            element-loading-spinner="el-icon-loading"
+            element-loading-background="rgba(0, 0, 0, 0.8)">
+              <p>代码式策略</p>
+              <p>通过提交自定义代码来实现公式推导</p>
+          </div> 
+        </div>
+        <div class="gobutton">
+          <a href="#"><div class="btn_step_go" @click="goBack()">上一步</div></a>
+          <a href="#"><div class="btn_step_go" @click="jump()">下一步</div></a>
+        </div> 
+    </div>
+    </div>
+</body>
+<script src="./element_ui/vue.js"></script>
+<script src="./element_ui/element.js"></script>
+<script src="./js/step0.js"></script>
+
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>消息列表</title>
+
+    <link rel="stylesheet" href="../css/reset.css"/>
+    <link rel="stylesheet" href="../element_ui/element.css">
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/messageList.css">
+    <style>
+        .el-dropdown-link {
+        cursor: pointer;
+        color: #409EFF;
+      }
+      .el-icon-arrow-down {
+        font-size: 12px;
+      }
+      .el-dropdown {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+    }
+        </style>
+</head>
+
+<body>
+
+    <div id="message" v-cloak>
+        <!-- 顶部 -->
+      <!-- 登录状态 -->
+      <div class="top" v-if="onLogin">
+        <div class="center">
+            <h1>
+                <span>
+                <img src="../img/logo_03.png" alt="" />
+                </span>
+            </h1>
+          <div class="user us_center">
+                <el-dropdown :hide-on-click="false" @command="handleCommand">   
+                    <div class="hea">
+                        <div class="head_portrait">
+                            <img :src="head_portrait" onerror="this.src='../img/head-img.png'" alt="" />
+                        </div>
+                        <div class="info">{{student_name}}</div>
+                    </div>
+                    <!-- {{student_name}} -->
+                    <div class="submenu">
+                            <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item command="a">个人中心</el-dropdown-item>
+                            <el-dropdown-item command="b">退出</el-dropdown-item>
+                            </el-dropdown-menu>
+                        <!-- <a href="">个人中心</a>
+                        <a href="">退出</a> -->
+                    </div>
+                </el-dropdown>
+          </div>
+        </div>
+      </div>
+      <!-- 未登录状态 -->
+      <div class="top" v-if="downLogin">
+        <div class="center">
+          <h1>
+            <span>
+              <img src="../img/logo_03.png" alt="" />
+            </span>
+          </h1>
+          <div class="user">
+            <div class="btn btn_blue" @click="lo()">登录</div>
+            <div class="btn" @click="re()">注册</div>
+          </div>
+        </div>
+      </div>
+        <!-- 面包屑导航 -->
+        <div class="locate">
+            <div class="crumbs">
+                <el-breadcrumb separator="/">
+                    <div class="main_img icon">
+                        <i class="icon icon-del"></i>
+                    </div>
+                    <el-breadcrumb-item><a href="../index.html">首页</a></el-breadcrumb-item>
+                    <el-breadcrumb-item><a href="./usecenter.html">个人中心</a></el-breadcrumb-item>
+                    <el-breadcrumb-item><a href="./messageList.html">消息中心</a></el-breadcrumb-item>
+                </el-breadcrumb>
+            </div>
+        </div>
+        <!-- 左侧导航栏 -->
+        <div class="center band">
+            <div class="bandNav">
+                <!-- <div class="navItem fir">
+                    <a href="">消息</a>
+                </div> -->
+                <div class="navItem first">
+                    <a href="messageList.html">消息中心</a>
+                </div>
+                <!-- <div class="navItem">
+                    <a href="">点赞</a>
+                </div> -->
+            </div>
+            <!-- 消息列表 -->
+            <div class="navCont" id="p1">
+                <div class="contTitle">
+                    消息中心
+                </div>
+                <div class="main_top">
+                    <!-- 消息内容 -->
+                    <div class="main">
+                        <div class="main_zh ma_bo" v-for="(item,index) of tabledata" v-if="tabledata">
+
+                            <div class="main_left">
+                                <el-badge :is-dot="item.new_message_status" class="item" style="width: 60px; height: 60px;">
+                                    <img :src="item.head_portrait" onerror="this.src='../img/head-img.png'" alt="">
+                                </el-badge>
+                            </div>
+
+                            <div class="main_right">
+                                <div class="main_right_sec main_mang">
+                                    <span class="main_ris">{{item.title}}</span>
+                                    <span class="main_time">{{item.create_time}}</span>
+                                </div>
+                                <div class="main_right_three ">
+                                    <span class="main_src" style="text-align: left;">
+                                        {{item.content}}
+                                    </span>
+                                    <div class="main_to_s">
+                                        <span @click="remove(item.message_id)">
+                                            阅读全文
+                                        </span>
+                                        <div class="main_img icon">
+                                            <i class="icon icon-del"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="main_right_foot">
+                                    <div class="main_fi_one">
+                                        <div class="main_di"></div>
+                                        <span style="margin-right: 10px;">{{item.reply_num}} 条回复</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="demo2-2"></div>
+                        <div class="block main_foe">
+                            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage3" :page-size="10" layout="prev, pager, next, jumper" :total="1000">
+                            </el-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 分页 -->
+        <!-- <div class="pagenation">
+            <div class="page_btn">上一页</div>
+            <div class="page_btn">1</div>
+            <div class="page_btn">2</div>
+            <div class="page_btn">下一页</div>
+            <div class="pagemsg">共{{totalCount}}条信息/{{totalPage}}页</div>
+            <input type="text">
+            <div class="page_btn">跳转</div>
+        </div> -->
+         <!-- 页脚 -->
+        <div class="center footer">
+            <span>
+                <span>©2012-2020 华北水利水电大学</span>
+                <span>豫公网安备11010802017518</span>
+                <span>豫ICP备14061682号-1</span>
+            </span>
+        </div>
+    </div>
+    
+
+    <script src="../element_ui/vue.js"></script>
+    <script src="../element_ui/element.js"></script>
+    <script src="../publicJs/jquery-1.12.4.js"></script>
+    <script src="../publicJs/axios.js"></script>
+    <script src="../publicJs/pub.js"></script>
+    <script src="../js/messageList.js"></script>
+    <script> 
+        // window.setTimeout(() => {
+        //     $(".main_src").each(function() { 
+        //         //获取内容
+        //         console.log(123)
+        //         var str = $(this).html();
+        //         //截取内容5个字符
+        //         // console.log(str);
+        //         var subStr = str.substring(7, 100);
+        //         // console.log(subStr);
+        //         //如果长度大于140就添加省略号否则就添加空
+        //         var data = subStr + (str.length > 140 ? '...' : '');
+        //         $(this).html(data);
+        //     });
+        //     $(".main_ris").each(function() {
+        //         //获取内容
+        //         var mstr = $(this).html();
+        //         //截取内容5个字符
+        //         var msubStr = mstr.substring(0, 55);
+        //         console.log(msubStr);
+        //         //如果长度大于140就添加省略号否则就添加空
+        //         var data = msubStr + (mstr.length > 55 ? '...' : '');
+        //         $(this).html(data);
+        //     });
+        // }, 100);
+    </script>
+
+<script>
+    // 左侧导航栏选择
+    $(document).ready(function (){
+        $(".navItem").each(function(index){
+            $(this).click(function(){ 
+            $(".navItem").removeClass("first");
+            $(".navItem").eq(index).addClass("first");
+            });
+        });
+    });
+</script>
+</body>
+
+</html>

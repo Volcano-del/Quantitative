@@ -1,0 +1,258 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实验步骤五</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/step.css">
+    <link rel="stylesheet" href="./element_ui/element.css">
+
+    <style>
+        .band {
+            width: 90%;
+            min-width: 700px;
+            height: 460px;
+            margin: 20px 66px 0px;
+            /* background-color: blue; */
+        }
+        .center {
+            width:85%;
+            min-width: 850px;
+            margin: 20px auto 20px;
+            /* background-color: antiquewhite; */
+        }
+        .main {
+            padding-top: 100px;
+            background-color: #fff;
+            height:505px;
+        }
+        .line{
+            width: 100%;
+            min-width: 650px;
+            /* background-color: aqua; */
+            /* border-bottom: 1px solid #eee; */
+        }
+        .el-checkbox__label {
+            display: inline-block;
+            padding-left: 10px;
+            line-height: 19px;
+            font-size: 24px;
+        }
+        .el-checkbox__inner { 
+            width: 22px;
+            height: 22px;       
+        }
+        .el-checkbox__inner::after {       
+            height: 12px;           
+            width: 10px;          
+        }
+        .zhushi{
+            width: 90%;
+            margin: 0 auto;
+            /* margin-left: 30px; */
+        }
+        .zhushi div{
+            margin: 20px 0;
+            font-size: 18px;
+        }
+        .zhushi1{
+            font-weight: bold;
+            font-size: 20px!important;
+        }
+        .gobutton{
+            display: flex;
+            justify-content: center;
+            margin-top: 60px;
+        }
+        .gobutton a{
+            margin: 10px;
+        }
+        #customers
+          {
+          font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+          width:100%;
+          border-collapse:collapse;
+          }
+
+        #customers td, #customers th 
+          {
+          text-align: center;
+          font-size:1em;
+          border-top:1px solid #cad9ea;
+          border-bottom:1px solid #cad9ea;
+          padding:3px 7px 2px 7px;
+          }
+
+        #customers th 
+          {
+          font-size:1.1em;
+          text-align:center;
+          padding-top:5px;
+          padding-bottom:4px;
+          background-color:#CCE8EB;
+          color:#ffffff;
+          }
+        #customers tr.alt td 
+          {
+          color:#000000;
+          background-color:#F5FAFA;
+          }
+        .sele{
+          width: 75%;
+          height: 35px;
+          border: 1px solid #eeeeee;
+        }
+        .init{
+          height: 30px;
+          border: 1px solid #eee;
+        }
+        [v-cloak]{
+        display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+      <div id="header"></div>
+
+        <!-- <div class="top">
+            <div class="logo">
+                <img src="./img/logo_03.png" width="100%" alt="">
+            </div>
+            <div class="top_r">
+            <ul class="nav">
+                <li>首页</li>
+                <li>开始试验</li>
+                <li>我的试验</li>
+                
+            </ul>
+            <div class="btn_log">登录/注册</div>
+            </div>
+        </div> -->
+        <!-- 主体部分 -->
+        <div class="banner">
+            <img src="./img/banner.png" width="100%" alt="">
+        </div>
+        <div class="center main_title">
+            <div class="bar"></div>
+            <span class="title">量化选股之行情指标</span>
+        </div>
+        <div class="center main">
+          <div class="band">
+            <div class="line">
+              <table id="customers">
+                <tr>
+                  <th>指标名称</th>
+                  <th>选项</th>
+                  <th>值</th>
+                  <th>单位</th>
+                </tr>
+                
+                <tr>
+                  <td>昨日收盘价</td>
+                  <td>
+                    <select class="sele" v-model="quant_cs.y_close.condition" @change="change(1)">
+                      <option selected value="">请选择</option>
+                      <option value="g">大于n日均值</option>
+                      <option value="l">小于n日均值</option>
+                      <option value="e">等于n日均值</option>
+                    </select>
+                  </td>
+                  <td>
+                    <!-- <input type="number " name="number" placeholder="请输入内容" class="init" autocomplete="off" v-model="inpt1" @keyup="inpt1=inpt1.replace(/\D/g,'')" @afterpaste="inpt1=inpt1.replace(/\D/g,'')"> -->
+                    <select class="sele" v-model="quant_cs.y_close.value" style="width: 36%;" :disabled="disabled1">
+                      <option selected value="">请选择</option>
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="20">20</option>
+                    </select>
+                  </td>
+                  <td>天</td>
+                </tr>
+                
+                <tr class="alt">
+                  <td>昨日成交量</td>
+                  <td>
+                    <select class="sele" v-model="quant_cs.y_deal.condition" @change="change(2)">
+                      <option selected value="">请选择</option>
+                      <option value="g">大于n日均值</option>
+                      <option value="l">小于n日均值</option>
+                      <option value="e">等于n日均值</option>
+                    </select>
+                  </td>
+                  <td>
+                    <!-- <input type="number " name="number" placeholder="请输入内容" class="init" autocomplete="off" v-model="inpt2" @keyup="inpt2=inpt2.replace(/\D/g,'')" @afterpaste="inpt2=inpt2.replace(/\D/g,'')"> -->
+                    <select class="sele" v-model="quant_cs.y_deal.value" style="width: 36%;" :disabled="disabled2">
+                      <option selected value="">请选择</option>
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="20">20</option>
+                    </select>
+                  </td>
+                  <td>天</td>
+                </tr>
+                
+                <tr>
+                  <td>昨日振幅</td>
+                  <td>
+                    <select class="sele" v-model="quant_cs.y_hl.condition" placeholder="请选择" @change="change(3)">
+                      <option selected value="">请选择</option>
+                      <option value="g">大于</option>
+                      <option value="l">小于</option>
+                    </select>
+                  </td>
+                  <td>
+                      
+                    <input type="text " name="number" placeholder="请输入振幅" class="init" autocomplete="off" v-model="quant_cs.y_hl.value" :disabled="disabled3" oninput="value=value.replace(/[^\d.]/g,'');value = value.replace(/^\./g,'');value = value.replace(/\.{2,}/g,'.');value = value.replace('.','$#$').replace(/\./g,'').replace('$#$','.');value = value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3');if(value>100)value=parseInt(value/10);if(value<0)value=0" >
+                  </td>
+                  <td>%</td>
+                </tr>
+                
+                <tr class="alt">
+                  <td>累计涨幅</td>
+                  <td>
+                    <select class="sele" v-model="quant_cs.y_p.condition" @change="change(4)">
+                      <option selected value="">请选择</option>
+                      <option value="g5">5日累计大于</option>
+                      <option value="l5">5日累计小于</option>					  
+                      <option value="g10">10日累计大于</option>
+                      <option value="l10">10日累计小于</option>
+                    </select>
+                  </td>
+                  <td>
+                    <input type="text " name="number" placeholder="请输入涨幅" class="init" autocomplete="off" v-model="quant_cs.y_p.value" :disabled="disabled4" oninput="value=value.replace(/[^\d.]/g,'');value = value.replace(/^\./g,'');value = value.replace(/\.{2,}/g,'.');value = value.replace('.','$#$').replace(/\./g,'').replace('$#$','.');value = value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3');if(value>100)value=parseInt(value/10);if(value<0)value=0">
+                  </td>
+                  <td>%</td>
+                </tr>
+              </table>
+        </div>
+        <div >
+          <div class="gobutton" style="margin-top: 242px;">
+            <a href="./s_tep4.html"><div class="btn_step_go">上一步</div></a>
+            <a><div class="btn_step_go" @click="godown">下一步</div></a>
+          </div> 
+        </div>
+        </div>
+        </div>
+    </div>
+</body>
+<script src="./element_ui/vue.js"></script>
+<script src="./element_ui/element.js"></script>
+<script src="./publicJs/jquery-1.12.4.js"></script>
+<script src="./publicJs/pub.js"></script>
+<script src="./js/step_4.js"></script>
+<script>
+  $(function(){
+    $("#header").load("./html/header.html");
+  })
+</script>
+<!-- <script>
+  if($("option").length<=0){
+    this.$message.error('请至少选择一种选项');
+    return;
+  }
+</script> -->
+</html>

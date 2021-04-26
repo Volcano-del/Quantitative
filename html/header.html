@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>头部</title>
+    <link rel="stylesheet" href="./css/reset.css"/>
+    <link rel="stylesheet" href="./element_ui/element.css">
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <link rel="stylesheet" href="./css/header.css" />
+    <style>
+    .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+  .el-icon-arrow-down {
+    font-size: 12px;
+  }
+  .el-dropdown {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+    </style>
+  </head>
+
+  <body>
+    <div id="head" v-cloak>
+      <!-- 顶部 -->
+      <!-- 登录状态 -->
+        <div class="top" v-if="onLogin">
+            <div class="center">
+                <h1>
+                    <span>
+                    <img src="./img/logo_03.png" alt="" />
+                    </span>
+                </h1>
+                <div class="user us_center">
+                    <el-dropdown :hide-on-click="false" @command="handleCommand">   
+                        <div class="hea">
+                            <div class="head_portrait">
+                                <!-- <img :src="head_portrait" onerror="this.src='../img/head-img.png'" alt="" /> -->
+                            </div>
+                            <div class="info">{{student_name}}</div>
+                        </div>
+                        <!-- {{student_name}} -->
+                        <div class="submenu">
+                                <el-dropdown-menu slot="dropdown">
+                                <el-dropdown-item command="a">个人中心</el-dropdown-item>
+                                <el-dropdown-item command="b">退出</el-dropdown-item>
+                                </el-dropdown-menu>
+                            <!-- <a href="">个人中心</a>
+                            <a href="">退出</a> -->
+                        </div>
+                    </el-dropdown>
+                </div>
+            </div>
+        </div>
+        <!-- 未登录状态 -->
+        <div class="top" v-if="downLogin">
+            <div class="center">
+                <h1>
+                    <span>
+                    <img src="./img/logo_03.png" alt="" />
+                    </span>
+                </h1>
+                <div class="user">
+                    <div class="btn btn_blue" @click="lo()">登录</div>
+                    <div class="btn" @click="re()">注册</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./element_ui/vue.js"></script>
+    <script src="./element_ui/element.js"></script>
+    <script src="./publicJs/jquery-1.12.4.js"></script>
+    <script src="./publicJs/axios.js"></script>
+    <script src="./publicJs/pub.js"></script>
+    <script src="./js/header.js"></script>
+  </body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/common.css">
+</head>
+<body onkeydown="keyLogin()">
+    <div id="app" v-cloak>
+        <!-- logo图标 -->
+        <div class="top">
+            <div class="center">
+                <img src="../img/logo_03.png" alt="">
+            </div>
+        </div>
+        <!-- 登录 -->
+        <div class="content" id="log">
+                <div class="main">
+                    <div class="lbt-part">
+                        <img src="../img/lbt.png" width="100%" alt="">
+                    </div>
+                    <div class="use-content">
+                        <div class="use-handler">
+                            <div class="reg">账号登录</div>
+                            <div class="spa">
+                                <div class="msg_error" v-if="errorStatus">
+                                    {{errorMsg}}，请重新输入
+                                    <!-- <a href="findPwd.html">找回密码</a> -->
+                                </div>
+                            </div>
+                            <div class="msg" contenteditable="true">
+                                <div>
+                                    <img src="../img/i_count.png" alt="">
+                                </div>
+                                <input type="text" placeholder="请输入账号/手机号" v-model="account_num" >
+                            </div>
+                            <div class="msg">
+                                <div>
+                                    <img src="../img/i_pwd.png" alt="">
+                                </div>
+                                <input type="password" placeholder="请输入密码" v-model="password">
+                            </div>
+                        </div>
+                        <div class="mess">
+                            <div class="zhu" onclick="onzhu()">
+                                立即注册
+                            </div>
+                        </div>
+                        <div class="btn">
+                            <div id="input1" class="reg_now mr" @click="judgeLog()">
+                                登录
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <span>
+                    <span>©2012-2020 华北水利水电大学</span>
+                    <span>豫公网安备11010802017518</span>
+                    <span>豫ICP备14061682号-1</span>
+                </span>
+            </div>
+    </div>
+    <script src="../publicJs/vue.js"></script>
+    <script src="../publicJs/axios.js"></script>
+    <script src="../publicJs/jquery-1.12.4.js"></script>
+    <script src="../publicJs/pub.js"></script>
+    <script src="../js/log.js"></script>
+    <script>
+        // 点击立即注册跳转注册页面
+        function onzhu(){
+            window.location.href='reg.html'
+        }
+    </script>
+    <script>
+        
+        function keyLogin(){
+            if (event.keyCode==13)  //回车键的键值为13
+            document.getElementById("input1").click(); //调用登录按钮的登录事件
+        }
+    </script>
+    <!-- <script>
+        window.onload=function(){
+            var input = document.getElementsByTagName("input");
+            console.log(input)
+            var ppt = document.getElementsByClassName("msg");
+            console.log(ppt)
+            input.onfocus = function() {
+                ppt.style.bordercolor="#4182fa";                 
+                 this.value='';
+             };
+             input.onblur = function() {
+                ppt.style.bordercolor="#eeeeee";
+                 if(this.value.length < 1) this.value='请输入'; 
+             };  
+        }
+    </script> -->
+
+</body>
+</html>

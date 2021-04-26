@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阅读全文</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../element_ui/element.css">
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/read.css">
+    <style>
+         .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+  .el-icon-arrow-down {
+    font-size: 12px;
+  }
+  .el-dropdown {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.el-textarea__inner{
+          border: solid 1px #eeeeee;
+        }
+        .el-textarea__inner:hover{
+          border-color: #e2d8d0;
+        }
+        .el-textarea__inner:focus{
+          border-color: #d4baa4;
+        }
+        .el-textarea__inner{
+          color:#b0a8a3;
+        }
+        .el-textarea__inner::-webkit-input-placeholder{
+          color:#b4b4b4;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- nav_start -->
+    <div id="app" v-cloak>
+        <!-- 顶部 -->
+      <!-- 登录状态 -->
+      <div class="top" v-if="onLogin">
+        <div class="center">
+            <h1>
+                <span>
+                <img src="../img/logo_03.png" alt="" />
+                </span>
+            </h1>
+          <div class="user us_center">
+                <el-dropdown :hide-on-click="false" @command="handleCommand">   
+                    <div class="hea">
+                        <div class="head_portrait">
+                            <img :src="head_portrait" onerror="this.src='../img/head-img.png'" alt="" />
+                        </div>
+                        <div class="info">{{student_name}}</div>
+                    </div>
+                    <!-- {{student_name}} -->
+                    <div class="submenu">
+                            <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item command="a">个人中心</el-dropdown-item>
+                            <el-dropdown-item command="b">退出</el-dropdown-item>
+                            </el-dropdown-menu>
+                        <!-- <a href="">个人中心</a>
+                        <a href="">退出</a> -->
+                    </div>
+                </el-dropdown>
+          </div>
+        </div>
+      </div>
+      <!-- 未登录状态 -->
+      <div class="top" v-if="downLogin">
+        <div class="center">
+          <h1>
+            <span>
+              <img src="../img/logo_03.png" alt="" />
+            </span>
+          </h1>
+          <div class="user">
+            <div class="btn btn_blue" @click="lo()">登录</div>
+            <div class="btn" @click="re()">注册</div>
+          </div>
+        </div>
+      </div>
+        <!-- nav_end -->
+
+        <!-- 面包屑导航 -->
+        <div class="locate">
+          <div class="crumbs">
+              <el-breadcrumb separator="/">
+                  <div class="main_img icon">
+                      <i class="icon icon-del"></i>
+                  </div>
+                  <el-breadcrumb-item><a href="../index.html">首页</a></el-breadcrumb-item>
+                  <el-breadcrumb-item><a href="./leaving.html">公共留言中心</a></el-breadcrumb-item>
+                  <el-breadcrumb-item><a href="./read.html">留言详情</a></el-breadcrumb-item>
+              </el-breadcrumb>
+          </div>
+        </div>
+        <!-- 面包屑导航 -->
+        <div class="locate2">
+          <div class="crumbs">
+              <el-breadcrumb separator="/">
+                  <div class="main_img icon">
+                      <i class="icon icon-del"></i>
+                  </div>
+                  <el-breadcrumb-item><a href="/index.html">首页</a></el-breadcrumb-item>
+                  <el-breadcrumb-item><a href="./usecenter.html">个人中心</a></el-breadcrumb-item>
+                  <el-breadcrumb-item><a href="./messageList.html">消息中心</a></el-breadcrumb-item>
+                  <el-breadcrumb-item><a href="./read.html">留言详情</a></el-breadcrumb-item>
+              </el-breadcrumb>
+          </div>
+        </div>
+        <div class="main_sec">
+            <div class="center band">
+                <!-- 左侧导航栏 -->
+                <div class="bandNav">
+                    <div class="navItem fir" class="message_item">
+                        <a href="#p1">留言详情</a>
+                    </div>
+                    <!-- <div class="navItem">
+                        <a href="messageList.html">消息中心</a>
+                    </div> -->
+                    <!-- <div class="navItem">
+                        <a href="#p1">点赞</a>
+                    </div> -->
+                </div>
+                <!-- 消息列表 -->
+                <div class="navCont" id="">
+                    <div class="contTitle">
+                        <div class="tit">留言详情</div>
+                    </div>
+                    <div class="main_top">
+                        <!-- 消息内容 -->
+                        <div class="main">
+                                <!-- 最开始留言内容 -->
+                                <div class="first_con">
+                                    <div class="main_left">
+                                        <img :src="message_head_portrait" onerror="this.src='../img/head-img.png'" alt="">
+                                    </div>
+                                    <div class="ly">
+                                        <div class="main_mang">
+                                            <div class="tit">{{title}}</div>
+                                            <div >{{create_time}}</div>
+                                        </div>
+                                        <div class="main_right_three">
+                                            <span class="main_src">{{content}}</span>
+                                            <div class="ud" onclick="showCon()">
+                                                <span class="main_to_s active" style="display:block;">
+                                                    展开                       
+                                                    <div class="main_img icon">
+                                                        <i class="icon icon-del"></i>
+                                                    </div>
+                                                </span>
+                                                <span class="main_to_s hide" style="display:none;">
+                                                    收起                       
+                                                    <div class="main_imgs icon">
+                                                        <i class="icon icon-del"></i>
+                                                    </div>
+                                                </span>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 对话内容 -->
+                                <div class="main_right">
+                                  <div class="title">
+                                    <div class="line"></div>
+                                        <div class="main_all">全部问答</div>
+                                  </div>
+                                        
+                                    <!-- 管理员回复 -->
+                                    <div class="gl">
+                                    <div class="main_reply" v-for="(item,index) of replyInfoList">
+                                        <!-- 第一个样式 -->
+                                        <div class="peo" v-if="item.user_id==null">
+                                          <div class="head">
+                                            <div class="l"><div class="peo_one">管理员</div>
+                                              <div class="peo_two">回复</div>
+                                              <div class="peo_three">{{message_student_name}}</div></div>
+                                              <div class="ti">
+                                                {{create_time}}
+                                              </div>
+                                          </div>
+                                            <div class="textarea">
+                                              <p class="peo_four">{{item.content}}</p>
+                                              <div class="hidden">
+                                                <div class="inquiry">
+                                                  <div class="icon">
+                                                    <!-- <i class="icons icons-del"></i> -->
+                                                  </div>
+                                                  <div class="t" @click="show()" style="display: block;">
+                                                    询问
+                                                  </div>
+                                                </div>
+                                                <div class="iqb" style="display: none;" >
+                                                  <div class="txt_h">
+                                                    <el-input
+                                                        type="textarea"
+                                                        :autosize="{ minRows: 2, maxRows: 4}"
+                                                        placeholder="请输入内容"
+                                                        v-model="textarea2">
+                                                    </el-input>
+                                                  </div>
+                                                  <div class="btn">                                                    
+                                                    <div class="suc" @click="userReply(true)" :plain="true" >
+                                                      发布
+                                                    </div>
+                                                
+                                                    <div class="fal" @click=userReply(false)>
+                                                      取消
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>                                        
+                                        <!-- 第二个样式 -->
+                                        <div v-if="item.user_id" class="main_con">
+                                          <div class="d_t">
+                                            <div class="lg">
+                                              <div class="pic"><img :src="message_head_portrait" onerror="this.src='../img/head-img.png'" alt=""></div>
+                                              <div class="name">{{message_student_name}}</div>                                            
+                                            </div>
+                                              <div class="main_time">{{item.create_time}}</div>
+                                          </div>
+                                            <div class="t_con">{{item.content}}</div>
+                                        </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                <div id="demo2-2" class="main_foe"></div>
+                    <div class="block main_foe">
+                        <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page="currentPage"
+                        :page-sizes="[5, 10, 25, 50]"
+                        :page-size="pageSize"
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="totalCount">
+                        </el-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- 提出新留言 -->
+    <!-- 页脚 -->
+    <div class="center footer">
+        <span>
+          <span>©2012-2020 华北水利水电大学</span>
+          <span>豫公网安备11010802017518</span>
+          <span>豫ICP备14061682号-1</span>
+        </span>
+    </div>
+    </div>
+    <script src="../publicJs/element_ui/vue.js"></script>
+    <script src="../publicJs/element_ui/element.js"></script>
+    <script src="../publicJs/axios.js"></script>
+    <script src="../publicJs/jquery-1.12.4.js"></script>
+    <script src="../layui/layui.js"></script>
+    <script src="../publicJs/pub.js"></script>
+    <script src="../js/show.js"></script>
+    <script src="../js/read.js"></script>
+    <script>
+        window.setTimeout(() => {
+            $(".main_src").each(function() {
+                // 获取内容
+                var mstr = $(this).html(); //显示
+                // console.log(mstr);//全部内容
+                //截取内容5个字符
+                var msubStr = mstr.substring(0, 72);
+                // console.log(msubStr);//省略内容
+                // console.log(msubStr);
+                //如果长度大于140就添加省略号否则就添加空
+                var data = msubStr + (mstr.length > 72 ? '...' : ''); //省略
+                $(this).html(data);
+                var oA = document.getElementsByClassName('main_to_s')[0];//切换
+                
+                if(mstr.length <=72){
+                    $(".active").hide();
+                    $(".hide").hide() 
+                }
+
+                showCon=function(){
+                    // 省略到显示
+                    if(document.querySelector(".main_src").innerHTML==data){
+                        document.querySelector(".main_src").innerHTML=mstr;
+                        // oA.innerHTML='收起︿'
+                        $(".active").hide();
+                        $(".hide").show() 
+                    // 显示到省略
+                    }else if(document.querySelector(".main_src").innerHTML==mstr){
+                        document.querySelector(".main_src").innerHTML=data;
+                            $(".hide").hide();
+                            $(".active").show()
+                    }
+                }
+            })
+        }, 50);
+         
+
+    </script>
+    <script>
+        
+        // function show(){//点击询问控制回复框的显示隐藏
+        //     if(user_id == ""){
+        //         this.$confirm('请先登录, 是否继续?', '提示', {
+        //             confirmButtonText: '去登录',
+        //             cancelButtonText: '取消',
+        //             type: 'warning'
+        //         }).then(() => {
+        //             window.location.href = '../html/log.html';
+        //         }).catch(() => {
+                        
+        //         });
+        //     }
+        //     if(document.querySelector(".iqb").style.display=="block"){
+        //         document.querySelector(".iqb").style.display='none';
+        //     }else{
+        //         document.querySelector(".iqb").style.display="block";
+        //     }
+        // }
+    </script>
+    <script>
+    // 左侧导航栏选择
+    $(document).ready(function (){
+        $(".navItem").each(function(index){
+            $(this).click(function(){ 
+            $(".navItem").removeClass("first");
+            $(".navItem").eq(index).addClass("first");
+            });
+        });
+    });
+    </script>
+
+</body>
+
+</html>

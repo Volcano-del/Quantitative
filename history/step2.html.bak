@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>步骤二</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/step.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="top">
+            <div class="logo">
+                <img src="./img/logo_03.png" width="100%" alt="">
+            </div>
+            <div class="top_r">
+            <ul class="nav">
+                <li>首页</li>
+                <li>开始试验</li>
+                <li>我的试验</li>
+                
+            </ul>
+            <div class="btn_log">登录/注册</div>
+            </div>
+        </div>
+        <div class="banner">
+            <img src="./img/banner.png" width="100%" alt="">
+        </div>
+        <div class="center main_title">
+            <div class="bar"></div>
+            <span>选择数据类型</span>
+        </div>
+        <div class="center main">
+            <div class="band">
+                <div class="line">
+                    <input type='checkbox' name='VoteOption1' value=1>高频数据<br>
+                    <input type='checkbox' name='VoteOption1' value=2>日线数据<br>
+                    <input type='checkbox' name='VoteOption1' value=3>周线数据<br>
+                    <input type='checkbox' name='VoteOption1' value=4>月线数据<br>
+                </div>
+               <div>
+                   注释:
+                   1.高频数据:高频数据一般是时间间隔较短（低于一日）的证券交易数据，一般例如股票价格、外汇价格以及成交量等等。
+                   2.日线数据:日线数据每一天的k线数据。
+                   3.周线数据:周线数据每一周的k线数据。
+                   4.月线数据:月线数据每一月的k线数据。
+               </div>
+				  <div class="gobutton">
+          <a href="#"><div class="btn_step_go" @click="goBack()">上一步</div></a>
+          <a href="#"><div class="btn_step_go" @click="jump()">下一步</div></a>
+        </div> 
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>步骤二</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/step.css">
+    <link rel="stylesheet" href="./element_ui/element.css">
+    <style>
+        .line span:first-child {
+            width: 140px;
+            font-size: 19px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="top">
+            <div class="logo">
+                <img src="./img/logo_03.png" width="100%" alt="">
+            </div>
+            <div class="top_r">
+            <ul class="nav">
+                <li>首页</li>
+                <li>开始试验</li>
+                <li>我的试验</li>
+                
+            </ul>
+            <div class="btn_log">登录/注册</div>
+            </div>
+        </div>
+        <div class="banner">
+            <img src="./img/banner.png" width="100%" alt="">
+        </div>
+        <div class="center main_title">
+            <div class="bar"></div>
+            <span>选择初始条件</span>
+        </div>
+        <div class="center main">
+            <div class="band">
+                <div class="line">
+                    <span>初始资金：</span>
+                    <select class="control" placeholder="请选择回测条件" value="">
+					 <option value=""></option>
+                        <option value="上证50">上证50</option>
+                        <option value="银行股">银行股</option>
+                        <option value="other">其他</option>
+                    </select>
+                </div>
+                <div class="line" >   
+                    <span>回测时间：</span>
+                        <div class="block" >
+                            <el-date-picker
+                            v-model="value1"
+                            type="date"
+                            placeholder="选择日期">
+                            </el-date-picker>
+                        </div>
+                   
+                    <span class="sp">至</span>
+               
+                        <div class="block" >
+                            <el-date-picker
+                            v-model="value2"
+                            type="date"
+                            placeholder="选择日期">
+                            </el-date-picker>
+                        </div>
+                 
+                </div>
+                <div class="line">
+                    <span>绩效基准：</span>
+                    <select class="control" placeholder="请选择启动资金" value="">
+					 <option value=""></option>
+                        <option value="10">10万元</option>
+                        <option value="50">50万元</option>
+                        <option value="100">100万元</option>
+                        <option value="500">500万元</option>
+                    </select>
+                </div>
+				  <div class="gobutton">
+          <a href="#"><div class="btn_step_go" @click="goBack()">上一步</div></a>
+          <a href="#"><div class="btn_step_go" @click="jump()">下一步</div></a>
+        </div> 
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./element_ui/vue.js"></script>
+<script src="./element_ui/element.js"></script>
+<script src="./js/step1.js"></script>
+</html>

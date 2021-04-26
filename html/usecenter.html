@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用户中心</title>
+    <!-- <link rel="stylesheet" href="../css/common.css"> -->
+    <link rel="stylesheet" href="../css/usecenter.css">
+    <link rel="stylesheet" href="../element_ui/element.css">
+    <style>
+        .el-dropdown-link {
+            cursor: pointer;
+            color: #409EFF;
+        }
+
+        .el-icon-arrow-down {
+            font-size: 12px;
+        }
+
+        .el-dropdown {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+        }
+
+        .breadcrumb-item+.breadcrumb-item::before {
+            content: ">";
+        }
+
+        .breadcrumb .breadcrumb-item a {
+            color: gray;
+        }
+
+        .el-row button {
+            width: 280px;
+            height: 54px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 顶部 -->
+    <div id="app" v-cloak>
+        <!-- 顶部 -->
+        <div class="top" v-if="onLogin">
+            <div class="center">
+                <h1>
+                    <span>
+                        <img src="../img/logo_03.png" alt="" />
+                    </span>
+                </h1>
+                <div class="user us_center">
+                    <el-dropdown :hide-on-click="false" @command="handleCommand">
+                        <div class="hea">
+                            <div class="head_portrait">
+                                <img :src="view_head_portrait" onerror="this.src='../img/head-img.png'" alt="" />
+                            </div>
+                            <div class="info">{{student_name}}</div>
+                        </div>
+                        <!-- {{student_name}} -->
+                        <div class="submenu">
+                            <el-dropdown-menu slot="dropdown">
+                                <el-dropdown-item command="a">个人中心</el-dropdown-item>
+                                <el-dropdown-item command="b">退出</el-dropdown-item>
+                            </el-dropdown-menu>
+                            <!-- <a href="">个人中心</a>
+                        <a href="">退出</a> -->
+                        </div>
+                    </el-dropdown>
+                </div>
+            </div>
+        </div>
+
+        <div class="top" v-if="downLogin">
+            <div class="center">
+                <h1>
+                    <span>
+                        <img src="../img/logo_03.png" alt="" />
+                    </span>
+                </h1>
+                <div class="user">
+                    <div class="btn btn_blue" @click="lo()">登录</div>
+                    <div class="btn" @click="re()">注册</div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="top" v-if="onLogin">
+        <div class="center">
+            <h1>
+                <span>
+                    <img src="../img/logo_03.png" alt="">
+                </span>
+            </h1>
+            <div class="user">
+                <img class="head_portrait" :src="head_portrait" alt="">
+                <div class="info">{{student_name}}</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="top"  v-if="downLogin">
+        <div class="center">
+            <h1>
+                <span>
+                    <img src="../img/logo_03.png" alt="">
+                </span>
+            </h1>
+            <div class="user">
+                <div class="btn btn_blue" @click="lo()">登录</div>
+                <div class="btn" @click="re()">注册</div>
+            </div>
+        </div>
+    </div> -->
+        <div id="usercenter" v-cloak>
+            <!-- 面包屑导航 -->
+            <div class="locate">
+                <div class="crumbs">
+                    <el-breadcrumb separator="/">
+                        <div class="main_img icon">
+                            <i class="icon icon-del"></i>
+                        </div>
+                        <el-breadcrumb-item><a href="../index.html">首页</a></el-breadcrumb-item>
+                        <el-breadcrumb-item><a href=".//usecenter.html">个人中心</a></el-breadcrumb-item>
+                    </el-breadcrumb>
+                </div>
+            </div>
+            <!-- <div class="locate">
+                    <div class="crumbs">
+                        <el-breadcrumb separator-class="el-icon-arrow-right">
+                            <div class="main_img icon">
+                                <i class="icon icon-del"></i>
+                            </div>
+                            <el-breadcrumb-item 
+                                :to="item.path"
+                                v-for="item in levelList"
+                                :key="item.path"
+                            >{{item.meta.title}}</el-breadcrumb-item>
+                
+                        </el-breadcrumb>
+                    </div>
+                </div> -->
+
+            <p class="clr"></p>
+            <div class="center band">
+                <div class="bandNav">
+                    <div class="navItem first">
+                        <a href="#p1">基本信息</a>
+                    </div>
+                    <div class="navItem">
+                        <a href="#p2">修改密码</a>
+                    </div>
+                    <div class="navItem" id="">
+                        <a href="#p3">修改手机</a>
+                    </div>
+                    <div class="navItem">
+                        <a href="#p5">开始实验</a>
+                    </div>
+                    <div class="navItem">
+                        <a href="#p4">学生成绩</a>
+                    </div>
+                    <div class="navItem">
+                        <a @click="messCenter()">消息中心</a>
+                    </div>
+                </div>
+                <!-- 修改个人信息 -->
+                <div class="navCont" id="p1">
+                    <div class="contTitle">
+                        基本信息
+                    </div>
+                    <div class="cont">
+                        <div>
+                            <div>
+                                <div class="line">
+                                    <div class="lineTitle">手机号码:</div>
+                                    <div><span>{{iphone}}</span>
+                                        <!-- <div class="btn_change"><a href="#p3">修改手机</a></div> -->
+                                    </div>
+                                </div>
+                                <div class="line">
+                                    <div class="lineTitle">真实姓名:</div>
+                                    <div><span>{{student_name}}</span></div>
+                                </div>
+                                <div class="line">
+                                    <div class="lineTitle">学生属性:</div>
+                                    <div><span>{{isos}}</span></div>
+                                </div>
+                                <div class="line">
+                                    <div class="lineTitle">性别:</div>
+                                    <div>
+                                        <span class="sex"><i id="nan" @click="nan()"></i>男</span>
+                                        <span class="sex"><i id="nv" @click="nv()"></i>女</span>
+                                    </div>
+                                </div>
+                                <div class="line">
+                                    <div class="lineTitle"></div>
+                                    <div>
+                                        <div class="btn_save" @click="saveStudent()">保存</div>
+                                        <div class="btn_cancel">取消</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cont_r">
+                                <!-- <img :src="head_portrait" width="100%" alt=""> -->
+                                <!-- <div class="btn_edit">修改头像</div> -->
+                                <form action="" method="post" enctype="multipart/form-data"></form>
+                                <table>
+                                    <tr>
+                                        <td id="imgStyle"><img id="img" :src="view_head_portrait"
+                                                onerror="this.src='../img/head-img.png'" style="width:100%; height:100%;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td height="50px" width="300px" align="center">
+                                            <div class="tou">
+                                                <a href="javascript:" id="imgStylebutton">修改头像</a>
+                                                <input @change="uploadPic()" type="file" id="uploadImg"
+                                                    accept="image/jpg,image/jpeg,image/png,image/PNG">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- 修改密码 -->
+                <div class="navCont" id="p2">
+                    <div class="contTitle">
+                        修改密码
+                    </div>
+                    <div class="cont password">
+                        <div class="errortip" v-if="editPassword.errorStatus">{{editPassword.errorMsg}}</div>
+                        <div>
+                            <div class="cont_l">
+                                <div class="line">
+                                    <div class="lineTitle">旧密码:</div>
+                                    <div><input type="password" v-model="editPassword.old_password" placeholder="请输入旧密码">
+                                        <div class="btn_forget">忘记密码？</div>
+                                    </div>
+                                </div>
+                                <div class="line">
+                                    <div class="lineTitle">新密码:</div>
+                                    <div><input type="password" v-model="editPassword.new_password" placeholder="请输入新密码"></div>
+                                </div>
+                                <div class="line">
+                                    <div class="lineTitle">确认密码:</div>
+                                    <div><input type="password" v-model="editPassword.confirm_password" placeholder="请确认新密码"></div>
+                                </div>
+                                <!-- <div class="line"> -->
+                                    <!-- <div class="lineTitle"></div> -->
+                                    <!-- <div> -->
+                                        <div class="tip">密码6-20个字符，由字母、数字和符号的两种以上组合</div>
+                                    <!-- </div> -->
+                                <!-- </div> -->
+                                <div class="lines">
+                                    <div class="btn_save" @click="subEditPwd()">保存</div>
+                                    <div class="btn_cancel" @click="delet">取消</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cont p_result" style="display: none;">
+                        <div>
+                            <div class="msg">
+                                <div></div>
+                                <p>修改密码成功，请牢记新的登录密码！</p>
+                                <p>自动跳转登录页面，需要重新登录！</p>
+                            </div>
+                            <div class="btn_relog" @click="reLogin()">重新登录</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 修改绑定手机 -->
+                <div class="navCont" id="p3">
+                    <div class="contTitle">
+                        修改手机
+                    </div>
+                    <div class="cont password">
+                        <div class="errortip" v-if="errStatus">{{errMsg}}</div>
+                        <div>
+                            <div class="cont_l">
+                                <div class="line">
+                                    <div class="lineTitle">验证密码:</div>
+                                    <div><input type="password" v-model="password" placeholder="请输入验证密码"></div>
+                                </div>
+                                <div class="line">
+                                    <div class="lineTitle">修改手机:</div>
+                                    <div><input type="text" v-model="eidtIphone" placeholder="请输入新手机号"></div>
+                                </div>
+                                <div class="lines_s">
+                                    <div class="btn_save" @click="Editphone()">保存</div>
+                                    <div class="btn_cancel" @click="delet">取消</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 第三步：修改结果 -->
+                    <div class="cont p_result" style="display: none;">
+                        <div>
+                            <div class="msg">
+                                <div></div>
+                                <p>修改手机成功！</p>
+                                <!-- <p>自动跳转登录页面，需要重新登录！</p> -->
+                            </div>
+                            <!-- <div class="btn_relog">重新登录</div> -->
+                        </div>
+                    </div>
+                </div>
+                <!-- 学生成绩 -->
+                <div class="navCont" id="p4">
+                    <div class="contTitle">
+                        学生成绩
+                    </div>
+                    <div class="btn_ss">
+                        <el-button type="primary" icon="el-icon-download" @click="download()">下载实验报告</el-button>
+                        <!-- <el-button type="primary">上传<i class="el-icon-upload el-icon--right"></i></el-button>
+                        <input @change="uploadRecord()" type="file" id="uploadFile" accept="image/jpg,image/jpeg,image/png,image/PNG,application/msword"> -->
+                        <el-dialog
+                            title="填写实验内容"
+                            :visible.sync="contentDialogVisible"
+                            width="900px"
+                           
+                            center>
+                            <template>
+                                <el-tabs tab-position="left" style="height: 350px;">
+                                    <el-tab-pane label="一、实验目的">
+                                            <el-input type="textarea" v-model="ex_1" :autosize="{ minRows: 16, maxRows: 16}"></el-input>
+                                    </el-tab-pane>
+                                    <el-tab-pane label="二、实验原理">
+                                        <el-input type="textarea" v-model="ex_2" :autosize="{ minRows: 16, maxRows: 16}"></el-input>
+                                    </el-tab-pane>
+                                    <el-tab-pane label="三、实验设备">
+                                        <el-input type="textarea" v-model="ex_3" :autosize="{ minRows: 16, maxRows: 16}"></el-input>
+                                    </el-tab-pane>
+                                    <el-tab-pane label="四、实验材料">
+                                        <el-input type="textarea" v-model="ex_4" :autosize="{ minRows: 16, maxRows: 16}"></el-input>
+                                    </el-tab-pane>
+                                    <el-tab-pane label="五、实验步骤">
+                                        <el-input type="textarea" v-model="ex_5" :autosize="{ minRows: 16, maxRows: 16}"></el-input>
+                                    </el-tab-pane>
+                                    <el-tab-pane label="六、心得体会">
+                                        <el-input type="textarea" v-model="ex_6" :autosize="{ minRows: 16, maxRows: 16}"></el-input>
+                                    </el-tab-pane>
+                                </el-tabs>
+                            </template>
+
+                            <span slot="footer" class="dialog-footer">
+                                <el-button @click="contentDialogVisible = false">取 消</el-button>
+                                <el-button @click="saveExperimentContent(1)" >保存</el-button>
+                                <el-button type="primary" @click="saveExperimentContent(2)">保存并下载实验报告</el-button>
+                            </span>
+                            </el-dialog>
+                    </div>
+                    <el-table :data="tableData" style="width: 100%;border-top: 1px solid #eee;">
+                        <el-table-column prop="dn" label="" width="20">
+                        </el-table-column>
+                        <el-table-column prop="student_name" label="学生姓名">
+                        </el-table-column>
+                        <el-table-column prop="create_time" label="实验时间" width="150">
+                        </el-table-column>
+                        <el-table-column prop="initial_funding" label="	初始资金">
+                        </el-table-column>
+                        <el-table-column prop="final_funding" label="总资产">
+                        </el-table-column>
+                        <!-- <el-table-column
+                        prop="grade"
+                        label="实验评分">
+                        </el-table-column> -->
+                        <el-table-column label="操作">
+                            <template slot-scope="scope">
+                                <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">查看</el-button>
+                                <!-- <el-button
+                                size="mini"
+                                type="primary"
+                                @click="download(scope.$index, scope.row)">下载</el-button> -->
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                </div>
+
+                <!-- 开始实验 -->
+                <div class="navCont" id="p5">
+                    <div class="contTitle shiyan">
+                        开始实验
+                    </div>
+                    <el-row style="width: 770px;">
+                        <el-button type="danger">
+                            <a href="../s_tep1.html" target="_blank">程式化交易虚拟仿真实验</a>
+                        </el-button>
+                    </el-row>
+                </div>
+                <!-- 电商平台 -->
+                <!-- <div class="navCont" id="p6" >
+                    <div class="contTitle">
+                        电商平台
+                    </div>
+                    <div class="cont p_result">
+                        <div>
+                            <div class="btn_relog">功能尚在完善中...</div>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- 直播视频 -->
+                <!-- <div class="navCont" id="p7" >
+                    <div class="contTitle">
+                        直播实验
+                    </div>
+                    <div class="cont p_result">
+                        <div>
+                            <div class="btn_relog">功能尚在完善中...</div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="../publicJs/vue.js"></script>
+    <script src="../element_ui/element.js"></script>
+    <script src="../publicJs/axios.js"></script>
+    <script src="../publicJs/jquery-1.12.4.js"></script>
+    <script src="../publicJs/pub.js"></script>
+    <script src="../js/usercenter.js"></script>
+    <script>
+        window.location.href = "#p1";
+        var guding = document.querySelectorAll('.bandNav>.navItem');
+        if (guding) {
+            for (var i = 0; i < guding.length; i++) {
+                guding[i].onclick = function () {
+                    var par = this.parentNode;
+                    var tag = par.classList.contains('click');
+                    reset();
+                    if (tag) {
+                        par.classList.remove('click');
+                    } else {
+                        par.classList.add('click');
+                    }
+                }
+            }
+            function reset() {
+                for (var j = 0; j < guding.length; j++) {
+                    guding[j].parentNode.classList.remove('click');
+                }
+            }
+        }
+    </script>
+    <script>
+        // 左侧导航栏选择
+        $(document).ready(function () {
+            $(".navItem").each(function (index) {
+                $(this).click(function () {
+                    $(".navItem").removeClass("first");
+                    $(".navItem").eq(index).addClass("first");
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

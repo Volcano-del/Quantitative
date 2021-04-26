@@ -1,0 +1,367 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实验步骤四</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/step.css">
+    <link rel="stylesheet" href="./element_ui/element.css">
+
+    <style>
+        .center{
+          width: 1200px;
+          margin: 0 auto;
+          display: flex;
+          min-width: 850px;
+            margin: 20px auto 20px;
+        }
+        .band{
+          display: flex;
+          justify-content: space-between;
+          margin-top: 2%;
+        }
+        .navCont{
+          width: 1200px;
+          float: left;
+          padding-top: 50px;
+        }
+        .main_top{
+          min-width: 1200px;
+          margin: 35px auto;
+          
+        }
+        .main_top .main{
+          width: 1200px;
+          padding-top: 50px;
+          background-color: #fff;
+          box-shadow: 0px 0px 4px 0px rgba(75, 91, 138, 0.1)!important;
+          margin: -61px auto;
+          
+        }
+        .first_con{
+          width: 100%;
+          justify-content: flex-start;
+          align-items: flex-start;
+          padding-bottom: 20px;
+          min-width: 1200px;
+        }
+        .main_right{
+          margin-top: 20px;
+          border: 1px solid #333;
+        }
+        .cell{
+          width: 181px;
+        }
+        
+
+
+
+        .el-checkbox__label {
+            display: inline-block;
+            padding-left: 10px;
+            line-height: 19px;
+            font-size: 24px;
+        }
+        .el-checkbox__inner { 
+            width: 22px;
+            height: 22px;       
+        }
+        .el-checkbox__inner::after {       
+            height: 12px;           
+            width: 10px;          
+        }
+       
+        .gobutton{
+          display: flex;
+          justify-content: center;
+          margin-top: 60px;
+          position: absolute;
+          left: 40%;
+        }
+        .gobutton a{
+            margin: 10px;
+        }
+		/* .band{
+		width:calc(100% - 54px);
+		margin: 20px auto 0px;
+		height: 546px;
+		} */
+		.main_title span{
+		letter-spacing:3px;
+		}
+		.el-radio__label{
+		font-size:18px;
+		
+		}
+		.b_title{
+    font-size: 20px;
+    height: 54px;
+    line-height: 54px;
+    background-color: #ccc;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+		}
+		/* .line_lin{
+		border:none;} */
+		.el-table{
+		font-size:18px;
+		}
+		.el-table .cell.el-tooltip{
+		font-weight:normal;
+		color:#333;
+		}
+		.el-table thead{
+		color:#999;
+		}
+		.choose{
+		display: flex;
+    justify-content: space-between;
+    align-items: center;
+	height: 36px;
+    line-height: 36px;
+		}
+		.enter{
+		width:88px;
+    height:100%;
+    line-height:36px;
+    text-align:center;
+    border:2px solid #333;
+    cursor: pointer;
+    border-radius: 3px;
+		}
+.enter a{
+    display:block;
+    width:100%;
+    height:100%;
+    margin-top: -2px;
+    color:#333;
+    font-size:18px;
+    letter-spacing: 3px;
+    font-weight: 600;
+}
+.bot{
+    display: flex;
+    justify-content: flex-start;
+	  align-items: center;
+    margin-top: 20px;
+}
+.main{
+    padding:27px 0;}
+.gobutton{
+    margin:40px 0;
+}
+    [v-cloak]{
+        display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+      <div id="header"></div>
+
+        <!-- <div class="top">
+            <div class="logo">
+                <img src="./img/logo_03.png" width="100%" alt="">
+            </div>
+            <div class="top_r">
+            <ul class="nav">
+                <li>首页</li>
+                <li>开始试验</li>
+                <li>我的试验</li>
+                
+            </ul>
+            <div class="btn_log">登录/注册</div>
+            </div>
+        </div> -->
+        <!-- 主体部分 -->
+        <div class="banner">
+            <img src="./img/banner.png" width="100%" alt="">
+        </div>
+        <div class="center main_title">
+            <div class="bar"></div>
+            <span class="title">选择标的类型</span>
+        </div>
+        <div class="center band">
+            <div class="navCont">
+              <div class="main_top">
+                <div class="main">
+                  <div class="first_con">
+                    <div class="b_title">版块列表</div>
+                      <div>
+                        <el-table
+                          ref="multipleTable"
+                          :data="tabledata"
+                          tooltip-effect="dark"
+                          style="width: 100%"
+                          @selection-change="handleSelectionChange"
+                          :row-key="rowCode"
+                         >
+                          <el-table-column
+                            type="selection"
+                            width="55"
+                            :reserve-selection="true">
+                          </el-table-column>
+                        <!--    <el-table-column
+                            label="选项"
+                            >
+                            <template slot-scope="scope">{{ scope.row.date }}</template> -->
+                          </el-table-column>
+                          <el-table-column
+                            prop="code"
+                            label="代码"
+                            >
+                          </el-table-column>
+                          <el-table-column
+                            prop="name"
+                            label="名称"
+                            show-overflow-tooltip>
+                          </el-table-column>
+                          <el-table-column
+                            prop="open"
+                            label="开盘价"
+                            show-overflow-tooltip>
+                          </el-table-column>
+                          <el-table-column
+                            prop="high"
+                            label="最高价"
+                            show-overflow-tooltip>
+                          </el-table-column>
+                          <el-table-column
+                            prop="low"
+                            label="最低价"
+                            show-overflow-tooltip>
+                          </el-table-column>
+                          <el-table-column
+                            prop="close"
+                            label="收盘价"
+                            show-overflow-tooltip>
+                          </el-table-column>
+                          <el-table-column
+                            prop="p_change"
+                            label="涨跌幅"
+                            show-overflow-tooltip>
+                          </el-table-column>
+                      </el-table>
+					            <div class="bot">
+                      <div style="margin-left:60px">          
+                        <el-button @click="toggleSelection()">取消选择</el-button>
+                      </div>
+                      <div style="text-align: center;width:calc(100% - 158px)">
+                        <div id="demo2-2" class="main_foe"></div>
+                          <div class="block main_foe">
+                              <el-pagination
+                              @size-change="handleSizeChange"
+                              @current-change="handleCurrentChange"
+                              :current-page="pageNum"
+                              :page-sizes="[5, 10, 25, 50]"
+                              :page-size="pageSize"
+                              layout="total, sizes, prev, pager, next, jumper"
+                              :total="totalCount">
+                              </el-pagination>
+                          </div>
+                        </div>
+                        <!-- <div class="block " >
+                          <el-pagination
+                            layout="prev, pager, next"
+                            :total="50">
+                          </el-pagination>
+                        </div> -->
+                      </div>
+					          </div>
+                  </div>
+
+                  <div class="main_right">
+                    <div class="b_title">已选择的股票池</div>
+            <div>
+                    <el-table
+                    :data="tableData1"
+                    stripe
+                    max-height="260"
+                    style="width: 100%;height:70%">
+                    <el-table-column
+                      prop="date1"
+                      width="50"
+                      >
+                    </el-table-column>
+                  <!--  <el-table-column
+                      prop="date"
+                      label="选项"
+                      >
+                    </el-table-column> -->
+                    <el-table-column
+                    prop="code"
+                    label="代码"
+                    >
+                    </el-table-column>
+                    <el-table-column
+                    prop="name"
+                    label="名称"
+                    >
+                    </el-table-column>
+                    <el-table-column
+                    prop="open"
+                    label="开盘价">
+                    </el-table-column>
+                    <el-table-column
+                    prop="high"
+                    label="最高价">
+                    </el-table-column>
+                    <el-table-column
+                      prop="low"
+                      label="最低价"
+                      show-overflow-tooltip>
+                    </el-table-column>
+                    <el-table-column
+                      prop="close"
+                      label="收盘价"
+                      show-overflow-tooltip>
+                    </el-table-column>
+                    <el-table-column
+                      prop="p_change"
+                      label="涨跌幅"
+                      show-overflow-tooltip>
+                    </el-table-column>
+                    <el-table-column
+                      fixed="right"
+                      label="操作"
+                      width="120">
+                      <template slot-scope="scope">
+                        <el-button
+                          @click.native.prevent="deleteRow(scope.$index, tableData1)"
+                          type="text"
+                          size="small">
+                          删除
+                        </el-button>
+                      </template>
+                    </el-table-column>
+                  </el-table>
+          </div>
+                  </div>
+                </div>
+              </div>
+          
+                <div class="gobutton">
+                  <a href="./s_tep3.html"><div class="btn_step_go">上一步</div></a>
+                  <a><div class="btn_step_go" @click="godown">下一步</div></a>
+                </div> 
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./element_ui/vue.js"></script>
+<script src="./element_ui/element.js"></script>
+<script src="./publicJs/jquery-1.12.4.js"></script>
+<script src="./publicJs/pub.js"></script>
+<script src="./publicJs/axios.js"></script>
+<script src="./js/step_3.js"></script>
+<script>
+  $(function(){
+    $("#header").load("./html/header.html");
+  })
+</script>
+	
+</html>

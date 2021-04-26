@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>步骤一</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/step.css">
+    <link rel="stylesheet" href="./element_ui/element.css">
+</head>
+<body>
+    <div class="top">
+        <div class="logo">
+            <img src="./img/logo_03.png" width="100%" alt="">
+        </div>
+        <div class="top_r">
+        <ul class="nav">
+            <li>导航1</li>
+            <li>导航2</li>
+            <li>导航3</li>
+            <li>导航4</li>
+            <li>导航5</li>
+            <li>导航6</li>
+            <li>导航7</li>
+        </ul>
+        <div class="btn_log">登录/注册</div>
+        </div>
+    </div>
+    <div class="banner">
+        <img src="./img/banner.png" width="100%" alt="">
+    </div>
+    <div class="center main_title">
+        <div class="bar"></div>
+        <span>实验流程设置</span>
+    </div>
+    <div class="center main">
+        <div class="band">
+            <div class="line">
+                <select class="control" placeholder="请选择回测条件" value="">
+                    <option value="上政50">上政50</option>
+                    <option value="银行股">银行股</option>
+                    <option value="other">其他</option>
+                </select>
+            </div>
+            <div class="line">
+                <div class="block">
+                    <span class="demonstration">默认</span>
+                    <el-date-picker
+                      v-model="value1"
+                      type="date"
+                      placeholder="选择日期">
+                    </el-date-picker>
+                  </div>
+                  <div class="block">
+                    <span class="demonstration">带快捷选项</span>
+                    <el-date-picker
+                      v-model="value2"
+                      align="right"
+                      type="date"
+                      placeholder="选择日期"
+                      :picker-options="pickerOptions">
+                    </el-date-picker>
+                  </div>
+                <input class="controls" type="date">
+                <span class="sp">至</span>
+                <input class="controls" type="date">
+            </div>
+            <div class="line">
+                <select class="control" placeholder="请选择启动资金" value="">
+                    <option value="10">10万元</option>
+                    <option value="50">50万元</option>
+                    <option value="100">100万元</option>
+                    <option value="500">500万元</option>
+                </select>
+            </div>
+            <a href="./step2.html"><div class="btn_step_go">下一步</div></a>
+        </div>
+    </div>
+</body>
+<script src="./element_ui/element.js"></script>
+</html>

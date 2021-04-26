@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>步骤三</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/step.css">
+    <link rel="stylesheet" href="./element_ui/element.css">
+
+    <style>
+        .band {
+            width: 90%;
+            min-width: 700px;
+            height: 460px;
+            margin: 20px 66px 0px;
+            /* background-color: blue; */
+        }
+        .center {
+            width:85%;
+            min-width: 850px;
+            margin: 20px auto 20px;
+            /* background-color: antiquewhite; */
+        }
+        .main {
+            padding-top: 50px;
+            background-color: #fff;
+            height: 505px;
+        }
+        .line{
+            width: 100%;
+            min-width: 650px;
+            /* background-color: aqua; */
+            border-bottom: 1px solid #eee;
+        }
+        .el-checkbox__label {
+            display: inline-block;
+            padding-left: 10px;
+            line-height: 19px;
+            font-size: 24px;
+        }
+        .el-checkbox__inner { 
+            width: 22px;
+            height: 22px;       
+        }
+        .el-checkbox__inner::after {       
+            height: 12px;           
+            width: 10px;          
+        }
+        .zhushi{
+            width: 90%;
+            margin: 0 auto;
+            /* margin-left: 30px; */
+        }
+        .zhushi div{
+            margin: 20px 0;
+            font-size: 18px;
+        }
+        .zhushi1{
+            font-weight: bold;
+            font-size: 20px!important;
+        }
+        .gobutton{
+            display: flex;
+            justify-content: center;
+            margin-top: 60px;
+        }
+        .gobutton a{
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="top">
+            <div class="logo">
+                <img src="./img/logo_03.png" width="100%" alt="">
+            </div>
+            <div class="top_r">
+            <ul class="nav">
+                <li>首页</li>
+                <li>开始试验</li>
+                <li>我的试验</li>
+                
+            </ul>
+            <div class="btn_log">登录/注册</div>
+            </div>
+        </div>
+        <div class="banner">
+            <img src="./img/banner.png" width="100%" alt="">
+        </div>
+        <div class="center main_title">
+            <div class="bar"></div>
+            <span class="title">选择数据类型</span>
+        </div>
+        <div class="center main">
+            <div class="band">
+                <div class="line" >
+            
+            <el-checkbox-group v-model="checkList" style="margin-left: 5%;">
+                        <el-checkbox label="高频数据"></el-checkbox>
+                        <el-checkbox label="日线数据"></el-checkbox>
+                        <el-checkbox label="周线数据"></el-checkbox>
+                        <el-checkbox label="月线数据"></el-checkbox>
+                    </el-checkbox-group>
+                </div>
+               <div class="zhushi">
+                   <div class="zhushi1">
+                    注释:
+                   </div>
+                   <div>
+                    1.高频数据:高频数据一般是时间间隔较短（低于一日）的证券交易数据，一般例如股票价格、外汇价格以及成交量等等。
+                   </div>
+                   <div>
+                    2.日线数据:日线数据每一天的k线数据。
+                   </div>
+                   <div>
+                    3.周线数据:周线数据每一周的k线数据。
+                   </div>
+                   <div>
+                    4.月线数据:月线数据每一月的k线数据。
+                   </div>
+               </div>
+				<div class="gobutton">
+          <a href="./step1.html"><div class="btn_step_go">上一步</div></a>
+          <a href="./step6.html"><div class="btn_step_go">下一步</div></a>
+        </div> 
+            </div>
+        </div>
+    </div>
+</body>
+    <script src="./element_ui/vue.js"></script>
+    <script src="./element_ui/element.js"></script>
+    <script src="./js/step2.js"></script>
+</html>

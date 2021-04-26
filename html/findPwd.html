@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/findPwd.css">
+</head>
+
+<body>
+    <div class="top">
+        <div class="center">
+            <img src="../img/logo.png" alt="">
+        </div>
+    </div>
+
+    <div class="content" id="findPwd">
+        <div class="main">
+            <div class="lbt-part">
+                <img src="../img/lbt.png" width="100%" alt="">
+            </div>
+            <div class="use-content">
+                <!-- 1 -->
+                <template v-if="curHand==0">
+                    <div class="use-handler">
+                        <div class="reg">找回密码</div>
+                        <div class="space" v-if="errorMsg.test">
+                            <div class="msg_error">
+                                验证码错误
+                            </div>
+                        </div>
+                        <div class="msg">
+                            <div>
+                                <img src="../img/i_count.png" alt="">
+                            </div>
+                            <input type="text" placeholder="请输入账号/手机号" v-model="person.acount">
+                        </div>
+                        <div class="msg" style="position: relative;">
+                            <div>
+                                <img src="../img/i_pwd.png" alt="">
+                            </div>
+                            <input type="text" placeholder="请输入验证码" v-model="person.test">
+                            <span class='codeBtn' @click="sendCode">
+                                {{cutDown?cutDown+'s':'获取验证码'}}
+                            </span>
+                        </div>
+                        <div class="jump">
+                            <div>
+                                <a href="">登录</a>|<a href="">注册</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn">
+                        <div class="reg_now" @click="changeProcess">
+                            确认
+                        </div>
+                    </div>
+                </template>
+                <!-- 2输入新密码 -->
+                <template v-if="curHand==1">
+                    <div class="use-handler">
+                        <div class="reg">找回密码</div>
+                        <div class="space">
+                            <div class="msg_error" v-if="errorMsg.difference">
+                                两次密码不一致
+                            </div>
+                        </div>
+                        <div class="msg">
+                            <div>
+                                <img src="../img/i_pwd.png" alt="">
+                            </div>
+                            <input type="text" placeholder="请输入新密码" v-model="person.new_pwd">
+                        </div>
+                        <div class="msg">
+                            <div>
+                                <img src="../img/i_pwd.png" alt="">
+                            </div>
+                            <input type="text" placeholder="请输入新密码" v-model="person.repeat_pwd">
+                        </div>
+                        <div class="jump">
+                            <div>
+                                <a href="./log.html">登录</a>|<a href="./reg.html">注册</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn">
+                        <div class="reg_now" @click="changeProcess">
+                            确认
+                        </div>
+                    </div>
+                    <div class="pwd_tip">
+                        <i>*</i>
+                        长度6~14位字符<br />
+                        支持数字、字母、特殊符号(空格除外)
+                    </div>
+                </template>
+                <!-- 3密码重置成功 -->
+                <template v-if="curHand==2">
+                    <div class="use-handler">
+                        <div class="reg">找回密码</div>
+                        <div class="space">
+                        </div>
+                        <div class="result">
+                            密码重置成功！立即<a href="./log.html">前往登录</a>
+                        </div>
+                        <div class="result blue">
+                            5秒后自动跳转...
+                        </div>
+                        <div class="jump">
+                            <div>
+                                <a href="./log.html">登录</a>|<a href="./reg.html">注册</a>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div>
+            <span>©2012-2019 河南机电职业技术学院</span>
+            <span>豫公网安备11010802017518</span>
+            <span>豫ICP备14061682号-1</span>
+        </div>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        var findPwd = new Vue({
+            el: '#findPwd',
+            data: {
+                errorMsg: {
+                    test:false,
+                    difference:false
+                },
+                process: [],
+                curHand: 0,
+                person:{
+                    acount:'',
+                    test:'',
+                    new_pwd:'',
+                    repeat_pwd:''
+                },
+                Code:'12121',
+                cutDown:false
+            },
+            methods:{
+                changeProcess(){
+                    switch (this.curHand){
+                        case 0:
+                            if(this.person.test==this.Code){
+                                this.curHand++;
+                                this.process.push(true)
+                            }else{
+                                this.errorMsg.test = true
+                                this.person.test=''
+                                this.process.push(false)
+                            }
+                            break;
+                        case 1:
+                            if(this.person.new_pwd==this.person.repeat_pwd){
+                                this.curHand++;
+                                this.process.push(true)
+                            }else{
+                                this.errorMsg.difference = true   
+                                this.process.push(false)
+                            }
+                    }
+                }
+                ,sendCode(){
+                    this.cutDown=60;
+                    var timeId=setInterval(() => {
+                        this.cutDown--;
+                        if(this.cutDown<=0){
+                            this.cutDown = false
+                            clearInterval(timeId)
+                        }
+                    }, 1000);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
